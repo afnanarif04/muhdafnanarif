@@ -21,37 +21,49 @@ Search each `.html` file for:
 
 Priority edits:
 
-1. **Photo** — drop a square-ish JPG/PNG into `assets/photo.jpg`, then in
-   `index.html` swap the placeholder `<svg>...</svg>` block for the
-   `<img>` tag given in the comment right above it. The favicon and OG
-   share image keep using the "MAA" monogram either way — no need to
-   change those unless you want to.
-2. **Google Scholar / ORCID** — still placeholders in `index.html` and
-   `contact.html`; replace with your real profile links. (Email, GitHub
-   and LinkedIn are already filled in with your real links.)
+1. ~~Photo~~ — done: `assets/photo.jpg` is your real photo, and
+   `index.html`'s hero now uses it. To swap it later, replace
+   `assets/photo.jpg` with a new square-ish image of the same filename
+   (it's cropped to a square automatically by the browser via
+   `object-fit: cover`). The favicon keeps the "MAA" monogram (a face
+   doesn't read well at 16px), and the OG share image now uses your
+   photo too.
+2. ~~Google Scholar / ORCID~~ — done: `index.html` and `contact.html`
+   now link to your real ORCID (`orcid.org/0009-0008-9717-5275`) and
+   Google Scholar (`scholar.google.com/citations?user=O4lJLBcAAAAJ`)
+   profiles. (Email, GitHub and LinkedIn were already filled in.)
 3. **Scholar citation stats** — the "Cited by [ ] · h-index [ ]" line
    under the hero links (`class="scholar-stats"` in `index.html`) is
    filled in by hand from your Scholar profile — see the note under
    "Scholar citation stats" below for why this can't be live.
-4. **Site URL for sharing** — every page's `<head>` has an `<!-- EDIT -->`
-   comment above a few `og:` / `twitter:` meta tags using
-   `https://your-username.github.io` as a placeholder domain. Once you
-   know your real GitHub Pages URL, find-and-replace that placeholder
-   across all 5 files so link previews (WhatsApp, LinkedIn, etc.) point
-   to the right place.
-5. **CV** — add your real `cv.pdf` into `assets/`.
-6. **Research → Working papers** — 3 placeholder entries are there,
-   collapsible like the published papers above them (click the title to
-   expand). Replace each title, authors/target journal, abstract and its
-   3 highlight bullets. Add or remove a whole `<details class="paper">…
-   </details>` block if you end up with more or fewer than 3. Once one
-   is real, consider copying its summary into the "Featured working
-   paper" section on `index.html` too (currently a matching placeholder).
-7. **Code** — the "View all repositories" button already links to your
-   real GitHub repo list. The "Featured repositories" cards below it are
-   placeholders (repo name, one-line description, language tag, link) —
-   pick 2–4 repos worth highlighting and fill those in; delete extra
-   cards or copy the block for more.
+4. ~~Site URL for sharing~~ — done: the `og:`/`twitter:` meta tags in every
+   page now point to `https://afnanarif04.github.io/muhdafnanarif/`,
+   matching this repo. If you ever rename the repo or move to a custom
+   domain, update those tags (and `og:url`) to match.
+5. ~~CV~~ — done: `assets/cv.pdf` is now a standard academic CV (no photo,
+   per your request) built from the same Education/Employment/
+   Publications/Presentations/Affiliations/Skills content on this page.
+   Regenerate it any time by editing this page's content and asking me
+   to rebuild the PDF, or edit `assets/cv.pdf` directly in any PDF editor.
+6. **Research → Working papers** — the 3 entries are now your real SSRN
+   papers, in the order you gave, each linking to its SSRN page. Their
+   abstracts could **not** be filled in automatically: SSRN's abstract
+   pages (`papers.ssrn.com/sol3/papers.cfm?abstract_id=...`) returned a
+   repeated access error (HTTP 429) for all three of your specific paper
+   IDs when fetched from here, even though other unrelated SSRN pages
+   loaded fine — so this looks specific to these three pages (possibly
+   because they're very recent submissions), not a general block. Each
+   entry has a `class="tofill"` note where the abstract goes — open your
+   SSRN page for each paper, copy the official abstract, and paste it in
+   to replace the note (search `research.html` for "SSRN could not be
+   reached"). No "Highlights" list was added for these three, to avoid
+   inventing bullet points that aren't actually in the paper — add one
+   yourself (3–5 short bullets, `<ul class="highlights">`, matching the
+   style of the published papers above) once you've pasted the abstract.
+7. ~~Code~~ — done: the 3 "Featured repositories" cards now link to your
+   real GitHub repos (12-gmm-with-common-correlated-effects,
+   21-gmm-with-latent-group-structure, 30-threedimensional-panel-with-
+   cce-framework), with descriptions drawn from each repo's README.
 8. **News** — the timeline on `index.html` is pre-filled with your most
    recent conference talk and two publications; add newer items above
    them as they happen, and trim old ones so it doesn't grow forever.
@@ -143,10 +155,11 @@ or `IntersectionObserver` isn't supported (logic in `js/site.js`, guarded
 by `<body data-page="home">`).
 
 ### Featured working paper on Home
-A new "Featured working paper" section sits below "Selected publications"
-on `index.html`, mirroring one placeholder card from `research.html`'s
-Working papers section — fill it in once you've filled in a real one
-there (see edit 6 above).
+A "Featured working paper" section sits below "Selected publications" on
+`index.html`, mirroring the first working paper from `research.html`'s
+Working papers section (currently "Short Dynamic Panels with
+Cross-Sectional Average Instruments under Multifactor Errors") — update
+it by hand if you reorder or swap your working papers.
 
 ## 3. Preview locally (optional)
 
