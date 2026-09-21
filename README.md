@@ -45,21 +45,11 @@ Priority edits:
    Publications/Presentations/Affiliations/Skills content on this page.
    Regenerate it any time by editing this page's content and asking me
    to rebuild the PDF, or edit `assets/cv.pdf` directly in any PDF editor.
-6. **Research → Working papers** — the 3 entries are now your real SSRN
-   papers, in the order you gave, each linking to its SSRN page. Their
-   abstracts could **not** be filled in automatically: SSRN's abstract
-   pages (`papers.ssrn.com/sol3/papers.cfm?abstract_id=...`) returned a
-   repeated access error (HTTP 429) for all three of your specific paper
-   IDs when fetched from here, even though other unrelated SSRN pages
-   loaded fine — so this looks specific to these three pages (possibly
-   because they're very recent submissions), not a general block. Each
-   entry has a `class="tofill"` note where the abstract goes — open your
-   SSRN page for each paper, copy the official abstract, and paste it in
-   to replace the note (search `research.html` for "SSRN could not be
-   reached"). No "Highlights" list was added for these three, to avoid
-   inventing bullet points that aren't actually in the paper — add one
-   yourself (3–5 short bullets, `<ul class="highlights">`, matching the
-   style of the published papers above) once you've pasted the abstract.
+6. ~~Research → Working papers~~ — done: the 3 entries are your real SSRN
+   papers, in the order you gave, each with its full official abstract,
+   keywords, and 5 highlight bullets (summarising the actual abstract —
+   the same standard as the published papers above), linking out to its
+   SSRN page.
 7. ~~Code~~ — done: the 3 "Featured repositories" cards now link to your
    real GitHub repos (12-gmm-with-common-correlated-effects,
    21-gmm-with-latent-group-structure, 30-threedimensional-panel-with-
