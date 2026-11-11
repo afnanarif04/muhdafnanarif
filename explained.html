@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research explained | Muhammad Afnan Arif</title>
+<meta name="description" content="Muhammad Afnan Arif's working papers on dynamic panel data econometrics, explained on three levels: general audience, undergraduate economics, and graduate econometrics.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="My research, explained on 3 levels | Muhammad Afnan Arif">
+<meta property="og:description" content="Three working papers on dynamic panel data models, explained for a general audience, undergraduate economics students, and graduate readers.">
+<meta property="og:image" content="https://afnanarif04.github.io/muhdafnanarif/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://afnanarif04.github.io/muhdafnanarif/assets/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body data-page="explained">
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html">Muhammad Afnan Arif</a>
+    <nav class="mainnav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="cv.html">CV</a>
+      <a href="research.html">Research</a>
+      <a href="explained.html" aria-current="page">Explained</a>
+      <a href="code.html">Code</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to dark mode"></button>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <section class="block" style="border-top:none; padding-top:44px;">
+      <h1 style="font-size:1.8rem;">My research, explained on 3 levels</h1>
+      <p class="intro">Below I explain my working papers on three levels: one for a general audience, one for undergraduate economics students, and one for the technical graduate reader. Explaining technical work clearly is hard, so if any part could be clearer, I would welcome your <a href="mailto:muhdafnanarif@gmail.com?subject=Feedback%20on%20%22Research%20explained%22">feedback</a>.</p>
+
+      <p class="note">These are plain-language readings of the paper abstracts, so they leave out detail on purpose. Where I write a model out, it is a stylised version to show the idea; the exact model, assumptions and results are in each paper on SSRN. The papers are working papers and may change.</p>
+
+      <!-- Level switcher: rendered by js/site.js. Without JavaScript all three levels are simply shown one after another. -->
+      <div class="level-switch" id="level-switch" role="group" aria-label="Choose an explanation level" hidden>
+        <button type="button" class="level-btn" data-level="general" aria-pressed="true">General audience</button>
+        <button type="button" class="level-btn" data-level="undergrad" aria-pressed="false">Undergraduate</button>
+        <button type="button" class="level-btn" data-level="grad" aria-pressed="false">Graduate</button>
+      </div>
+
+      <p class="theme-line"><strong>The common thread.</strong> All three papers study <em>dynamic panel data</em>: many units (countries, firms, country pairs) followed over time, where today's outcome depends on its own past. The difficulty is that we often see only a short stretch of time, and that units share unobserved forces or differ from each other in ways we cannot see. Each paper builds an estimator that stays reliable in one of these situations.</p>
+
+      <ul class="paper-jump" aria-label="Jump to a paper">
+        <li><a href="#paper-1"><span>Paper 1</span> Common shocks in short panels</a></li>
+        <li><a href="#paper-2"><span>Paper 2</span> Hidden groups of units</a></li>
+        <li><a href="#paper-3"><span>Paper 3</span> Dynamic bilateral (3D) panels</a></li>
+      </ul>
+    </section>
+
+    <!-- ================= PAPER 1 ================= -->
+    <section class="block explained" id="paper-1">
+      <h2>Paper 1 &middot; Short dynamic panels with cross-sectional average instruments under multifactor errors</h2>
+      <p class="paper-meta">SSRN working paper &middot; posted 26 Jun 2026 &middot;
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6889338" target="_blank" rel="noopener">Read on SSRN</a> &middot;
+        <a href="https://github.com/afnanarif04/12-gmm-with-common-correlated-effects" target="_blank" rel="noopener">Related code</a> &middot;
+        <a href="research.html">Full abstract</a></p>
+
+      <div class="level" data-level="general">
+        <h3 class="level-label">For a general audience</h3>
+        <p>Suppose you follow many countries for a few years and ask a simple question: how much does a country's income this year depend on its income last year? That is called <em>persistence</em>, and it matters for how long a shock, good or bad, is felt.</p>
+        <p>Two things get in the way. First, with only a few years of data, the standard tools give a biased answer to the persistence question. Second, countries do not live in isolation. Global events, such as a financial crisis or a swing in world demand, hit everyone, though not equally. If we ignore those shared shocks, we can mistake them for a country's own inertia.</p>
+        <p>The paper proposes an estimator that handles both problems at once. It uses a country's older history as a clean signal for its recent past, and it adds the average across all countries as a stand-in for the shared shocks. It does not need us to know in advance how many such shocks there are.</p>
+        <p>In two cross-country growth examples, accounting for the shared shocks lowers the estimated persistence of output per capita, and common global shocks turn out to explain much of the apparent persistence in countries' relative incomes.</p>
+      </div>
+
+      <div class="level" data-level="undergrad">
+        <h3 class="level-label">For undergraduate economics students</h3>
+        <p>Take a dynamic panel regression for unit <em>i</em> in year <em>t</em> (stylised; see the paper for the exact model):</p>
+        <p class="eq">y<sub>it</sub> = &lambda; y<sub>i,t&minus;1</sub> + x<sub>it</sub>&prime;&beta; + &alpha;<sub>i</sub> + &gamma;<sub>i</sub>&prime;f<sub>t</sub> + &epsilon;<sub>it</sub></p>
+        <p>Here &lambda; is the persistence we want, &alpha;<sub>i</sub> is a unit effect, and <em>f<sub>t</sub></em> are unobserved common factors (global shocks) that affect each unit through its own loading &gamma;<sub>i</sub>.</p>
+        <p><strong>Problem 1: short T.</strong> The lagged dependent variable is correlated with the unit effect, so least squares gives an inconsistent estimate of &lambda; when the number of time periods is fixed. The standard fix is to first-difference to remove &alpha;<sub>i</sub> and then instrument the differenced lag with older <em>levels</em> of y.</p>
+        <p><strong>Problem 2: common factors.</strong> If <em>f<sub>t</sub></em> is correlated with the regressors, it is an omitted variable. Pesaran's (2006) common correlated effects idea is to add cross-sectional averages of the data as controls, because they move with <em>f<sub>t</sub></em>.</p>
+        <p>The paper combines the two: lagged levels are the instruments, and cross-sectional averages of the levels enter as controls. The estimator is consistent and asymptotically normal as the number of units grows with T held fixed, and the number of factors need not be specified. In the simulations it has the smallest median bias among the competitors considered, including when the number of factors is unknown and when the loadings are correlated with the regressors.</p>
+      </div>
+
+      <div class="level" data-level="grad">
+        <h3 class="level-label">For the technical graduate reader</h3>
+        <p>The paper proposes a GMM estimator for short dynamic panels with a multifactor error structure. It combines the cross-sectional average (CCE) device with internal-instrument estimation of the autoregressive parameter: the first-differenced lagged dependent variable is instrumented with lagged levels, which removes the fixed-T inconsistency of least squares, while cross-sectional averages of the levels enter as controls that absorb the factor component.</p>
+        <p>Asymptotics are for N &rarr; &infin; with T fixed: the estimator is consistent and asymptotically normal, and it does not require the number of factors to be specified.</p>
+        <p>Simulations compare it with competing procedures across factor configurations, including an unknown number of factors and loadings correlated with the regressors, and report the smallest median bias for the proposed estimator. Two cross-country growth applications are given: accounting for the factor structure lowers estimated persistence of output per capita, and in an income convergence panel common global shocks explain much of the apparent persistence in relative income.</p>
+        <p class="aside">The exact moment conditions, the construction of the cross-sectional average controls and the regularity conditions are in the paper.</p>
+      </div>
+    </section>
+
+    <!-- ================= PAPER 2 ================= -->
+    <section class="block explained" id="paper-2">
+      <h2>Paper 2 &middot; Bias-corrected method of moments estimation for short-T dynamic panels with latent group structure</h2>
+      <p class="paper-meta">SSRN working paper &middot; posted 28 Jun 2026 &middot;
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6889919" target="_blank" rel="noopener">Read on SSRN</a> &middot;
+        <a href="https://github.com/afnanarif04/21-gmm-with-latent-group-structure" target="_blank" rel="noopener">Related code</a> &middot;
+        <a href="research.html">Full abstract</a></p>
+
+      <div class="level" data-level="general">
+        <h3 class="level-label">For a general audience</h3>
+        <p>People, firms and countries do not all respond to the same thing in the same way. Often they fall into a few types, but nobody hands us a list saying who belongs to which type, or even how many types there are.</p>
+        <p>This paper is about finding those hidden groups and measuring how each group behaves, using data that follow many units for only a short time. That is hard for two reasons. With few observations per unit, each unit's own pattern is noisy. And with a short history, the usual calculations carry a known built-in error that does not go away as you add more units.</p>
+        <p>The paper's method corrects that error within each group and, in the same procedure, sorts units into groups according to how well they match each group's pattern. The theory shows that, when both the number of units and the length of history grow, the method recovers the true grouping with probability approaching one. The length of history matters because to place a single unit in the right group you need enough of that unit's own data. The paper also gives a rule for choosing how many groups to use.</p>
+        <p>This paper develops the method and its theory; its abstract does not report an empirical application.</p>
+      </div>
+
+      <div class="level" data-level="undergrad">
+        <h3 class="level-label">For undergraduate economics students</h3>
+        <p>Start with a dynamic panel in which the slope coefficients are not the same for everyone, but are shared within groups (stylised; see the paper for the exact model):</p>
+        <p class="eq">y<sub>it</sub> = &alpha;<sub>i</sub> + &theta;<sub>g(i)</sub>&prime;z<sub>it</sub> + &epsilon;<sub>it</sub></p>
+        <p>Here <em>g(i)</em> is the group of unit <em>i</em>. It is an unobserved discrete label, and the number of groups is unknown. Within a group, the coefficients &theta;<sub>g</sub> are common.</p>
+        <p><strong>The bias.</strong> With a fixed number of time periods, estimating a separate unit effect &alpha;<sub>i</sub> for each unit creates the incidental parameters problem, which biases the dynamic coefficients. The paper removes the leading part of this bias within each group, using a moment condition derived from the profile score of the Gaussian likelihood.</p>
+        <p><strong>The grouping.</strong> Each unit is assigned to the group whose bias-corrected moments it fits best, using a rule that minimises a quadratic form in those moments.</p>
+        <p>The method extends split-panel jackknife bias correction to the case of discrete unobserved slope heterogeneity, and complements approaches based on quasi-differencing and on common correlated effects. Once units are classified, the group-specific coefficients are consistent and asymptotically normal with T fixed and N large. Recovering the partition itself needs T to grow, because the information about each unit has to accumulate. A consistent rule for selecting the number of groups is provided.</p>
+      </div>
+
+      <div class="level" data-level="grad">
+        <h3 class="level-label">For the technical graduate reader</h3>
+        <p>The paper proposes a bias-corrected method of moments estimator for short dynamic panels whose slopes vary across an unknown number of latent groups. Membership is an unobserved discrete classification and slopes are common within a group. The estimator combines a within-group bias-corrected moment condition, derived from the profile score of the Gaussian likelihood, with a classification rule that minimises a quadratic form in the bias-corrected moments.</p>
+        <p>The leading incidental-parameters bias under fixed T is removed within groups. The classification step recovers the latent partition with probability approaching one as both N and T grow, with T entering because classifying an individual unit needs its within-unit information to accumulate. Post-classification consistency and asymptotic normality of the group-specific coefficients are established under fixed T and large N, classification consistency as T grows, and a consistent rule for selecting the number of groups is provided.</p>
+        <p>Relative to the literature, the estimator extends split-panel jackknife bias correction to discrete unobserved slope heterogeneity, and it complements quasi-differencing and CCE-based approaches to unobserved heterogeneity.</p>
+        <p class="aside">The abstract reports theory only. How the two asymptotic regimes are linked, and the precise conditions, are in the paper.</p>
+      </div>
+    </section>
+
+    <!-- ================= PAPER 3 ================= -->
+    <section class="block explained" id="paper-3">
+      <h2>Paper 3 &middot; Common correlated effects estimation of dynamic three-dimensional heterogeneous panel data models</h2>
+      <p class="paper-meta">SSRN working paper &middot; posted 17 Jul 2026 &middot;
+        <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7001958" target="_blank" rel="noopener">Read on SSRN</a> &middot;
+        <a href="https://github.com/afnanarif04/30-threedimensional-panel-with-cce-framework" target="_blank" rel="noopener">Related code</a> &middot;
+        <a href="research.html">Full abstract</a></p>
+
+      <div class="level" data-level="general">
+        <h3 class="level-label">For a general audience</h3>
+        <p>Think of trade between countries. Each observation is a pair: an exporting country and an importing country, tracked year after year. A pair's trade this year depends on its trade last year, so there is momentum.</p>
+        <p>But trade flows are also pushed around by forces at three levels at once: global shocks that touch everyone, shocks specific to the exporting country, and shocks specific to the importing country. These shared forces make the pairs move together, and that confuses any attempt to measure how persistent each pair's own trade really is.</p>
+        <p>Statisticians already had a tool for removing shared shocks from ordinary country-by-year data, but not for data that has this exporter, importer and time structure with momentum. The paper shows how to extend the tool: for each pair, add averages taken across the data at three levels as extra controls. With that, both short-run and long-run effects can be estimated consistently.</p>
+        <p>The paper also shows that the obvious way of measuring uncertainty gives the wrong answer here, proposes a correct one, and suggests a resampling method for moderate sample sizes. In an application to bilateral export flows, once the shared shocks are removed, a pair's own persistence is small but precisely estimated.</p>
+      </div>
+
+      <div class="level" data-level="undergrad">
+        <h3 class="level-label">For undergraduate economics students</h3>
+        <p>Bilateral data are indexed by an origin <em>i</em>, a destination <em>j</em> and time <em>t</em>. A stylised dynamic pair regression is (see the paper for the exact model):</p>
+        <p class="eq">y<sub>ijt</sub> = &lambda;<sub>ij</sub> y<sub>ij,t&minus;1</sub> + x<sub>ijt</sub>&prime;&beta;<sub>ij</sub> + (global, origin-specific and destination-specific factors) + &epsilon;<sub>ijt</sub></p>
+        <p>Slopes differ across pairs. The mean group approach estimates each pair's regression separately and then averages the estimates.</p>
+        <p><strong>Why Pesaran (2006) is not enough.</strong> Common correlated effects (CCE) estimators proxy unobserved factors with cross-section averages, but that framework has been developed only for static and two-dimensional panels. When data are persistent and have this hierarchy of global, origin and destination factors, neither static 3D CCE nor dynamic 2D CCE recovers the short-run and long-run responses consistently.</p>
+        <p><strong>The fix.</strong> Augment each pair regression with current and lagged cross-section averages over three margins. Consistency and asymptotic normality follow when both cross-sectional dimensions and T grow, and the convergence rate is governed by the smaller dimension.</p>
+        <p><strong>Inference.</strong> The naive variance estimator based on dispersion across pairs is inconsistent here; a margin-based estimator is proposed and shown to be the only consistent choice. Plug-in estimators cannot capture all sources of estimation uncertainty, so a cross-section bootstrap is suggested for the persistence coefficient in moderate samples. Monte Carlo experiments confirm the theory.</p>
+      </div>
+
+      <div class="level" data-level="grad">
+        <h3 class="level-label">For the technical graduate reader</h3>
+        <p>The CCE framework of Pesaran (2006) has been developed only for static and two-dimensional panels. For dynamic three-dimensional panels with a hierarchical dependence structure, in which global, origin-specific and destination-specific factors operate simultaneously, neither static 3D CCE estimators nor dynamic 2D CCE estimators recover the short-run and long-run responses consistently.</p>
+        <p>The paper shows that the CCE mean group approach extends to this setting once each pair regression is augmented with current and lagged cross-section averages over three margins. Consistency and asymptotic normality follow from the joint expansion of both cross-sectional dimensions and the time dimension, with the convergence rate governed by the smaller dimension.</p>
+        <p>The naive pair-dispersion variance estimator is inconsistent in this setting. A margin-based variance estimator is proposed and shown to be the only consistent choice. Since standard plug-in estimators cannot account for all sources of estimation uncertainty, a cross-section bootstrap is suggested for inference on the persistence coefficient in moderate samples. Monte Carlo experiments confirm the theoretical results, and an application to bilateral export flows recovers a small but precisely estimated idiosyncratic persistence once the hierarchical factor structure is absorbed.</p>
+        <p class="aside">The definition of the three margins and the conditions for the rate result are in the paper.</p>
+      </div>
+    </section>
+
+    <section class="block">
+      <p class="closing">Questions, or a part that could be clearer? <a href="mailto:muhdafnanarif@gmail.com?subject=Feedback%20on%20%22Research%20explained%22">Send me feedback</a>. For the full abstracts, highlights and keywords, see the <a href="research.html">Research page</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap-wide">
+    <span>&copy; <span id="year"></span> Muhammad Afnan Arif</span>
+    <span>Kuala Lumpur, Malaysia</span>
+  </div>
+</footer>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>

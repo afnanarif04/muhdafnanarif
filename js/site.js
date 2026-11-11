@@ -66,3 +66,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
   targets.forEach(function (t) { observer.observe(t); });
 });
+
+// "Research explained" page: switch all papers between the three levels.
+// Progressive enhancement: without JS all three levels are shown in turn.
+// The chosen level is kept in the URL hash (#general, #undergrad, #grad) so a
+// link can point straight at one level. Paper anchors (#paper-1 ...) are left
+// alone.
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.body.getAttribute('data-page') !== 'explained') return;
+  var sw = document.getElementById('level-switch');
+  var levels = document.querySelectorAll('.level');
+  if (!sw || !levels.length) return;
+
+  var names = ['general', 'undergrad', 'grad'];
+  var buttons = sw.querySelectorAll('.level-btn');
+
+  function show(name) {
+    if (names.indexOf(name) === -1) name = 'general';
+    levels.forEach(function (el) {
+      el.classList.toggle('is-active', el.getAttribute('data-level') === name);
+    });
+    buttons.forEach(function (b) {
+      b.setAttribute('aria-pressed', b.getAttribute('data-level') === name ? 'true' : 'false');
+    });
+  }
+
+  document.body.classList.add('js-levels');
+  sw.hidden = false;
+
+  var fromHash = (location.hash || '').replace('#', '');
+  show(names.indexOf(fromHash) !== -1 ? fromHash : 'general');
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var name = b.getAttribute('data-level');
+      show(name);
+      try { history.replaceState(null, '', '#' + name); } catch (e) {}
+    });
+  });
+});

@@ -32,10 +32,8 @@ Priority edits:
    now link to your real ORCID (`orcid.org/0009-0008-9717-5275`) and
    Google Scholar (`scholar.google.com/citations?user=O4lJLBcAAAAJ`)
    profiles. (Email, GitHub and LinkedIn were already filled in.)
-3. **Scholar citation stats** — the "Cited by [ ] · h-index [ ]" line
-   under the hero links (`class="scholar-stats"` in `index.html`) is
-   filled in by hand from your Scholar profile — see the note under
-   "Scholar citation stats" below for why this can't be live.
+3. ~~Scholar citation stats~~ — removed: no manually-updated placeholders
+   remain on the site.
 4. ~~Site URL for sharing~~ — done: the `og:`/`twitter:` meta tags in every
    page now point to `https://afnanarif04.github.io/muhdafnanarif/`,
    matching this repo. If you ever rename the repo or move to a custom
@@ -54,9 +52,14 @@ Priority edits:
    real GitHub repos (12-gmm-with-common-correlated-effects,
    21-gmm-with-latent-group-structure, 30-threedimensional-panel-with-
    cce-framework), with descriptions drawn from each repo's README.
-8. **News** — the timeline on `index.html` is pre-filled with your most
-   recent conference talk and two publications; add newer items above
-   them as they happen, and trim old ones so it doesn't grow forever.
+8. ~~News~~ — removed: the placeholder timeline is gone from `index.html`.
+9. **Research explained (new)** — `explained.html` explains the 3 working
+   papers on 3 levels (general audience / undergraduate / graduate), with a
+   level switcher (no JS: all levels shown in turn) and a feedback link to
+   muhdafnanarif@gmail.com. Every claim is taken from the SSRN abstracts;
+   the stylised equations are labelled as such. If you revise a paper,
+   update its block here too. Add a 4th paper by copying one
+   `<section class="block explained">` and a `paper-jump` entry.
 
 ## 2. New in this version
 
